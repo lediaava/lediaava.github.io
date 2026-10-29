@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak - Ivanable Fleur</title>
+
+    <!-- Font Modern dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Latar Belakang Beige Soft & Reset */
+        body {
+            background-color: #f7f3e9;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #4a3e3d;
+            margin: 0;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* Container Utama */
+        .page-container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        /* Card Section Kontak */
+        .contact-section {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+            border: 1px solid #fce7ec;
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .contact-header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin-bottom: 10px;
+        }
+
+        .contact-header p {
+            font-size: 14px;
+            color: #6b5b52;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Grid Utama */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 30px;
+        }
+
+        /* --- Kolom Kiri: Panduan & Info Konsultasi --- */
+        .guide-side {
+            background-color: #fff9fa;
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid #fce7ec;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .guide-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin-bottom: 15px;
+        }
+
+        .guide-intro {
+            font-size: 13px;
+            color: #6b5b52;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .guide-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #6b5b52;
+        }
+
+        .step-number {
+            width: 26px;
+            height: 26px;
+            background-color: #5c1d34;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-item strong {
+            display: block;
+            color: #5c1d34;
+            margin-bottom: 2px;
+        }
+
+        /* Box Catatan Penting */
+        .note-box {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 14px;
+            border: 1px dashed #fce7ec;
+            font-size: 12px;
+            color: #7a6b63;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .note-box i {
+            color: #a8325d;
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        /* --- Kolom Kanan: Formulir --- */
+        .form-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #7a6b63;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid #fce7ec;
+            background-color: #fff9fa;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 13px;
+            color: #4a3e3d;
+            outline: none;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: #f8a5c2;
+            box-shadow: 0 0 0 3px rgba(248, 165, 194, 0.15);
+            background-color: #ffffff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 110px;
+        }
+
+        /* Tombol Kirim */
+        .submit-btn {
+            width: 100%;
+            background-color: #5c1d34;
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(92, 29, 52, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #7a2846;
+            transform: translateY(-2px);
+        }
+
+        /* Notifikasi Sukses */
+        .success-message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #eafaf1;
+            color: #27ae60;
+            border-radius: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #d4efdf;
+        }
+
+        /* Responsif Layar Kecil (HP) */
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 25px 20px;
+            }
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <section id="kontak" class="contact-section">
+            <div class="contact-header">
+                <h2>Hubungi Kami</h2>
+                <p>Ingin diskusi buket custom, konsultasi rangkaian bunga, atau pertanyaan lainnya? Tanyakan di sini.</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <!-- KOLOM KIRI: Panduan & Catatan Konsultasi -->
+                <div class="guide-side">
+                    <div>
+                        <h3 class="guide-title">Ingin Pesan Custom?</h3>
+                        <p class="guide-intro">
+                            Tuliskan keinginan Anda melalui formulir. Berikut alur cepat setelah Anda mengirim pesan:
+                        </p>
+
+                        <ul class="guide-steps">
+                            <li class="step-item">
+                                <span class="step-number">1</span>
+                                <div>
+                                    <strong>Isi Detail Pesan</strong>
+                                    Sampaikan konsep bunga, warna, atau estimasi tanggal acara.
+                                </div>
+                            </li>
+                            <li class="step-item">
+                                <span class="step-number">2</span>
+                                <div>
+                                    <strong>Konfirmasi Tim</strong>
+                                    Tim kami akan membalas via Email / WhatsApp maksimal 1x24 jam.
+                                </div>
+                            </li>
+                            <li class="step-item">
+                                <span class="step-number">3</span>
+                                <div>
+                                    <strong>Proses Rangkaian</strong>
+                                    Bunga siap dirangkai secara spesial sesuai permintaan Anda.
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Box Catatan Tambahan -->
+                    <div class="note-box">
+                        <i class="fa-solid fa-sparkles"></i>
+                        <span><strong>Jam Respon Cepat:</strong> Senin - Sabtu (09.00 - 17.00 WIB). Pesan di luar jam tersebut akan dibalas pada hari kerja berikutnya.</span>
+                    </div>
+                </div>
+
+                <!-- KOLOM KANAN: Formulir Kirim Pesan -->
+                <div class="form-side">
+                    <form id="contactForm" onsubmit="handleSubmit(event)">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Nama Lengkap</label>
+                                <input type="text" id="name" required placeholder="Nama Anda...">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email / WhatsApp</label>
+                                <input type="text" id="email" required placeholder="Email atau No. WA Anda...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Topik Pesan</label>
+                            <input type="text" id="subject" required placeholder="Misal: Custom Buket Wisuda / Tanya Katalog">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Pesan / Keinginan Anda</label>
+                            <textarea id="message" required placeholder="Tuliskan ide bunga, nuansa warna, atau pertanyaan Anda di sini..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fa-solid fa-paper-plane" style="margin-right: 6px;"></i> Kirim Pesan
+                        </button>
+                    </form>
+
+                    <!-- Notifikasi Sukses -->
+                    <div id="successMessage" class="success-message">
+                        Terima kasih! Pesan Anda berhasil dikirim ke Ivanable Fleur. 
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            document.getElementById('contactForm').reset();
+            
+            const successBox = document.getElementById('successMessage');
+            successBox.style.display = 'block';
+
+            setTimeout(() => {
+                successBox.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+
+</body>
+</html>

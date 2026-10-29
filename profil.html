@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<head>
+    <title>Profil - Ivanable Fleur</title>
+
+    <!-- Font Modern dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f7f3e9;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #4a3e3d;
+            margin: 0;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        /* Container Utama */
+        .page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        /* --- SECTION 1: PROFIL UTAMA (2 Kolom) --- */
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+            border: 1px solid #fce7ec;
+        }
+
+        .profile-left {
+            flex: 1.2;
+            text-align: left;
+        }
+
+        .profile-badge {
+            background-color: #fff1f3;
+            color: #a8325d;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 15px;
+            border: 1px solid #fce7ec;
+        }
+
+        .profile-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .profile-desc {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #6b5b52;
+            margin-bottom: 20px;
+        }
+
+        .profile-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            font-size: 13px;
+            color: #7a6b63;
+            font-weight: 500;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #fff9fa;
+            padding: 6px 12px;
+            border-radius: 12px;
+            border: 1px solid #fce7ec;
+        }
+
+        .meta-item i {
+            color: #f8a5c2;
+        }
+
+        .profile-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .polaroid-single {
+            background-color: #ffffff;
+            padding: 10px 10px 18px 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 6px;
+            width: 160px;
+            transform: rotate(3deg);
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid-single:hover {
+            transform: scale(1.05) rotate(0deg);
+        }
+
+        .polaroid-single img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .polaroid-single p {
+            font-family: 'Caveat', cursive;
+            font-size: 18px;
+            color: #5a4b43;
+            margin: 8px 0 0 0;
+            text-align: center;
+        }
+
+        /* --- SECTION 2: TENTANG KAMI & KONTAK (2 Kolom Grid) --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .info-card {
+            background-color: #fff1f3;
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid #fce7ec;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .info-icon {
+            width: 45px;
+            height: 45px;
+            background-color: #ffffff;
+            color: #a8325d;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .info-card h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin-bottom: 12px;
+        }
+
+        .info-card p, .contact-list {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #6b5b52;
+            margin: 0;
+        }
+
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .contact-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .contact-list i {
+            color: #a8325d;
+            margin-top: 4px;
+        }
+
+        /* --- SECTION 3: SOSIAL MEDIA --- */
+        .social-section {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 24px;
+            border: 1px solid #fce7ec;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.03);
+            text-align: center;
+        }
+
+        .social-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin-bottom: 8px;
+        }
+
+        .social-subtitle {
+            font-size: 14px;
+            color: #7a6b63;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #fff9fa;
+            color: #a8325d;
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid #fce7ec;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn i {
+            font-size: 18px;
+        }
+
+        .social-btn:hover {
+            background-color: #a8325d;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(168, 50, 93, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-left {
+                text-align: center;
+            }
+            .profile-meta {
+                justify-content: center;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .social-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .social-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        
+        <!-- BAGIAN PROFIL UTAMA -->
+        <section class="profile-container">
+            <div class="profile-left">
+                <span class="profile-badge">Official Profile</span>
+                <h1 class="profile-title">Ivanable Fleur</h1>
+                <p class="profile-desc">
+                    Menghadirkan karya, inspirasi, dan koneksi penuh makna. Terbuka untuk diskusi, kolaborasi, dan tautan silaturahmi yang hangat bersama para pecinta bunga.
+                </p>
+                
+                <div class="profile-meta">
+                    <span class="meta-item">
+                        <i class="fa-solid fa-location-dot"></i> Bandung, Indonesia
+                    </span>
+                    <span class="meta-item">
+                        <i class="fa-solid fa-envelope"></i> info@ivanablefleur.com
+                    </span>
+                </div>
+            </div>
+
+            <!-- Sisi Kanan: Sentuhan Polaroid Estetik -->
+            <div class="profile-right">
+                <div class="polaroid-single">
+                    <img src="img/bunga 2.jpeg" alt="Ivanable Fleur Studio">
+                    <p>Ivanable Fleur</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAGIAN TENTANG KAMI & INFORMASI KONTAK -->
+        <section class="info-grid">
+            <!-- Tentang Kami -->
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fa-solid fa-feather"></i>
+                </div>
+                <h2>Tentang Kami</h2>
+                <p>
+                    Ivanable Fleur berdedikasi penuh untuk memberikan pelayanan, informasi, serta buket bunga yang terbaik dengan kualitas terjamin.
+                </p>
+            </div>
+
+            <!-- Informasi Kontak -->
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fa-solid fa-address-card"></i>
+                </div>
+                <h2>Informasi Kontak</h2>
+                <ul class="contact-list">
+                    <li>
+                        <i class="fa-solid fa-map-pin"></i>
+                        <span>Jl. Ir. H. Juanda No. 123, Bandung, Jawa Barat</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-phone"></i>
+                        <span>+62 812-3456-7890</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>kontak@ivanablefleur.com</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- BAGIAN SOSIAL MEDIA -->
+        <section class="social-section">
+            <h2 class="social-title">Ikuti Media Sosial Kami</h2>
+            <p class="social-subtitle">Dapatkan pembaruan katalog terbaru dan inspirasi bunga harian</p>
+            <div class="social-links">
+                <a href="https://x.com" target="_blank" class="social-btn">
+                    <i class="fa-brands fa-x-twitter"></i>
+                    <span>X (Twitter)</span>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="social-btn">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="social-btn">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>TikTok</span>
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<head>
+    <title>Katalog Produk - Ivanable Fleur</title>
+
+    <!-- Font Modern dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #fce8ed 0%, #edf4ee 100%);
+            background-attachment: fixed;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #4a3e3d;
+            margin: 0;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        .page-container {
+            max-width: 1050px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .catalog-hero {
+            text-align: center;
+            padding: 20px 0 10px 0;
+        }
+
+        .catalog-hero h1 {
+            font-size: 34px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin: 0 0 10px 0;
+            letter-spacing: -0.5px;
+        }
+
+        .catalog-hero p {
+            font-size: 14px;
+            color: #6b5b52;
+            margin: 0 0 25px 0;
+            font-weight: 500;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: #ffffff;
+            color: #5c1d34;
+            border: 1px solid #f2cdd6;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(92, 29, 52, 0.03);
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #5c1d34;
+            color: #ffffff;
+            border-color: #5c1d34;
+        }
+
+        .category-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-left: 5px;
+        }
+
+        .category-header i {
+            font-size: 18px;
+            color: #ffffff;
+            background-color: #52796f;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(82, 121, 111, 0.2);
+        }
+
+        .category-header h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin: 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* --- KARTU PRODUK --- */
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #f4d3db;
+            box-shadow: 0 6px 16px rgba(92, 29, 52, 0.04);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(92, 29, 52, 0.09);
+        }
+
+        .product-img-box {
+            width: 100%;
+            height: 170px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-img-box img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #5c1d34;
+            color: #ffffff;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .product-content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-name {
+            font-size: 14px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin-bottom: 5px;
+        }
+
+        .product-desc {
+            font-size: 11px;
+            color: #6b5b52;
+            line-height: 1.4;
+            margin-bottom: 12px;
+            flex-grow: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 13px;
+            font-weight: 800;
+            color: #8b4a62;
+        }
+
+        .order-btn {
+            background-color: #f7d6df;
+            color: #4a1026;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .order-btn:hover {
+            background-color: #f8a5c2;
+        }
+
+        /* Responsif Layar Kecil (HP) */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        
+        <!-- HEADER / JUDUL KATALOG -->
+        <header class="catalog-hero">
+<h1> Katalog Lengkap Ivanable Fleur</h1>
+                      <div class="filter-buttons">
+            <p>Pilih rangkaian bunga terbaik untuk orang tersayang. Tersedia pilihan segar, kawat awet, dan artifisial estetik!</p>
+            
+            <div class="filter-buttons">
+                <div class="filter-buttons">
+                <button class="filter-btn active" onclick="location.href='#'">Semua Koleksi</button>
+                <button class="filter-btn" onclick="location.href='#segar'">Bunga Segar</button>
+                <button class="filter-btn" onclick="location.href='#kawat'">Bunga Kawat</button>
+                <button class="filter-btn" onclick="location.href='#artifisial'">Bunga Artifisial</button>
+            </div>
+        </header>
+
+        <!-- KELOMPOK 1: BUNGA SEGAR (ASLI) -->
+        <section id="segar" class="category-group">
+            <div class="category-header">
+                <i class="fa-solid fa-seedling"></i>
+                <h2>Koleksi Bunga Segar (Asli)</h2>
+            </div>
+            <div class="products-grid">
+                <!-- Produk 1 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Terlaris</span>
+                        <img src="img/bunga segar.jpeg" alt="Fresh Lily Bouquet">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Fresh Lily Bouquet</h3>
+                        <p class="product-desc">Bunga lily segar pilihan dirangkai elegan untuk momen romantis.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 120.000</span>
+                            <button class="order-btn" onclick="alert('🌷 Pesanan Fresh Lily Bouquet berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 2 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Favorit</span>
+                       <img src="img/Lily basket.jpe"  alt="Sunset Lily Basket">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Sunset Lily Basket</h3>
+                        <p class="product-desc">Keranjang bunga lili asli yang harum dan menenangkan ruangan.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 150.000</span>
+                            <button class="order-btn" onclick="alert('🌷 Pesanan Sunset Lily Basket berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 3 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Elegan</span>
+                        <img src="img/Tulips.jpe" alt="Sweet Tulip Fresh">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Sweet Tulip Fresh</h3>
+                        <p class="product-desc">Tulip segar import pilihan warna pastel lembut nan menawan.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 175.000</span>
+                            <button class="order-btn" onclick="alert('🌷 Pesanan Sweet Tulip Fresh berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 4 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Eksklusif</span>
+                         <img src="img/peony.jpe" alt="Peony Dream Box">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Peony Dream Box</h3>
+                        <p class="product-desc">Bunga peony segar dalam kotak box eksklusif kado spesial.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 210.000</span>
+                            <button class="order-btn" onclick="alert('🌷 Pesanan Peony Dream Box berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 5 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Manis</span>
+                        <img src="img/carnation.jpe" alt="Carnation Love Hug">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Carnation Love Hug</h3>
+                        <p class="product-desc">Buket anyelir segar penuh warna untuk ungkapan rasa sayang.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 95.000</span>
+                            <button class="order-btn" onclick="alert('🌷 Pesanan Carnation Love Hug berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 6 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Spesial</span>
+                        <img src="img/hydragea.jpe" alt="Hydrangea Pastel Fresh">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Hydrangea Pastel Fresh</h3>
+                        <p class="product-desc">Buket hidrangea besar segar yang rimbun dan cantik.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 160.000</span>
+                            <button class="order-btn" onclick="alert('🌷 Pesanan Hydrangea Pastel Fresh berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KELOMPOK 2: BUNGA KAWAT -->
+        <section id="kawat" class="category-group">
+            <div class="category-header">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h2>Koleksi Bunga Kawat (Pipe Cleaner)</h2>
+            </div>
+            <div class="products-grid">
+                <!-- Produk 1 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Terlaris</span>
+                        <img src="img/bunga kawat.jpeg" alt="Buket Lily Kawat">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Buket Lily Kawat</h3>
+                        <p class="product-desc">Cantik, awet selamanya tanpa layu. Cocok untuk hadiah wisuda.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 65.000</span>
+                            <button class="order-btn" onclick="alert('🌸 Pesanan Buket Tulip Kawat berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 2 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Lucu</span>
+                         <img src="img/sunflower.jpe" alt="Sunflower Kawat Mini">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Sunflower Kawat Mini</h3>
+                        <p class="product-desc">Bunga matahari kawat ceria yang manis untuk dekorasi meja.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 45.000</span>
+                            <button class="order-btn" onclick="alert('🌸 Pesanan Sunflower Kawat Mini berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 3 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Custom</span>
+                        <img src="img/daisy.jpe" alt="Pastel Daisy Kawat">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Pastel Daisy Kawat</h3>
+                        <p class="product-desc">Rangkaian bunga daisy kawat warna-warni super estetik.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 75.000</span>
+                            <button class="order-btn" onclick="alert('🌸 Pesanan Pastel Daisy Kawat berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 4 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Favorit</span>
+                        <img src="img/mawar.jpe"  alt="Rose Kawat Single Box">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Rose Kawat Single Box</h3>
+                        <p class="product-desc">Setangkai mawar kawat dalam box cantik anti debu.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 35.000</span>
+                            <button class="order-btn" onclick="alert('🌸 Pesanan Rose Kawat Single Box berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 5 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Unik</span>
+                         <img src="img/lavender.jpe" alt="Lavender Kawat Jar">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Lavender Kawat Jar</h3>
+                        <p class="product-desc">Hiasan toples jar berisi bunga lavender kawat ungu menawan.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 85.000</span>
+                            <button class="order-btn" onclick="alert('🌸 Pesanan Lavender Kawat Jar berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 6 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Mega</span>
+                         <img src="img/mix.jpe" alt="Grand Mix Pipe Bouquet">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Grand Mix Pipe Bouquet</h3>
+                        <p class="product-desc">Buket besar gabungan berbagai jenis bunga kawat warna-warni.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 135.000</span>
+                            <button class="order-btn" onclick="alert('🌸 Pesanan Grand Mix Pipe Bouquet berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KELOMPOK 3: BUNGA ARTIFISIAL -->
+        <section id="artifisial" class="category-group">
+            <div class="category-header">
+                <i class="fa-solid fa-leaf"></i>
+                <h2>Koleksi Bunga Artifisial</h2>
+            </div>
+            <div class="products-grid">
+                <!-- Produk 1 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Estetik</span>
+                         <img src="img/bunga artificial.jpeg" alt="Artifisial Rose Box">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Artifisial Rose Box</h3>
+                        <p class="product-desc">Kotak bunga Rose artifisial siap pajang mempercantik ruangan.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 85.000</span>
+                            <button class="order-btn" onclick="alert('🌿 Pesanan Artifisial Rose Box berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 2 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Modern</span>
+                        <img src="img/eucaliptus.jpe" alt="Eucalyptus Pot Artifisial">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Eucalyptus Pot Artifisial</h3>
+                        <p class="product-desc">Tanaman hias artifisial dalam pot estetik minimalis ruangan.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 95.000</span>
+                            <button class="order-btn" onclick="alert('🌿 Pesanan Eucalyptus Pot Artifisial berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 3 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Premium</span>
+                         <img src="img/Hydrangea 2.jpe" alt="Hydrangea Artifisial Bouquet">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Hydrangea Artifisial Bouquet</h3>
+                        <p class="product-desc">Buket bunga hidrangea tiruan dengan sentuhan sangat natural.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 110.000</span>
+                            <button class="order-btn" onclick="alert('🌿 Pesanan Hydrangea Artifisial Bouquet berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 4 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Chic</span>
+                        <img src="img/orchid white.jpe" alt="Orchid White Artifisial">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Orchid White Artifisial</h3>
+                        <p class="product-desc">Anggrek putih artifisial mewah cocok untuk hiasan ruang tamu.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 145.000</span>
+                            <button class="order-btn" onclick="alert('🌿 Pesanan Orchid White Artifisial berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 5 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Minimalis</span>
+                         <img src="img/cotton.jpe" alt="Cotton Flower Vase">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Cotton Flower Vase</h3>
+                        <p class="product-desc">Rangkaian bunga kapas kering artifisial gaya Skandinavia.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 90.000</span>
+                            <button class="order-btn" onclick="alert('🌿 Pesanan Cotton Flower Vase berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Produk 6 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Cozy</span>
+                        <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400" alt="Rustic Eucalyptus Bunch">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Rustic Eucalyptus Bunch</h3>
+                        <p class="product-desc">Ikatan daun eucalyptus artifisial bernuansa rustic natural.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 70.000</span>
+                            <button class="order-btn" onclick="alert('🌿 Pesanan Rustic Eucalyptus Bunch berhasil dicatat!')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>

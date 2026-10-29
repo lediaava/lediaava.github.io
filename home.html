@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<head>
+    <title>Home - Ivanable Fleur</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f7f3e9;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: #4a3e3d;
+            margin: 0;
+            padding: 30px 20px;
+            box-sizing: border-box;
+        }
+
+        .page-container {
+            max-width: 950px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+           .home-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            background-color: #ffffff;
+            padding: 45px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            border: 1px solid #fce7ec;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .home-container::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background-color: #fce7ec;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .left-content {
+            flex: 1;
+            text-align: left;
+            z-index: 1;
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin-bottom: 12px;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .intro-text {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #6b5b52;
+            margin-bottom: 20px;
+        }
+
+        .category-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .mini-btn {
+            background-color: #fff1f3;
+            color: #a8325d;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 700;
+            border: 1px solid #fce7ec;
+        }
+
+        .slogan {
+            font-family: 'Caveat', cursive;
+            font-size: 22px;
+            color: #8b4a62;
+            margin: 0;
+        }
+
+        .right-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .polaroid-gallery {
+            position: relative;
+            width: 280px;
+            height: 220px;
+        }
+
+        .polaroid-card {
+            position: absolute;
+            background-color: #ffffff;
+            padding: 8px 8px 12px 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 6px;
+            width: 115px;
+            transition: all 0.3s ease;
+        }
+
+        .polaroid-card img {
+            width: 100%;
+            height: 105px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .polaroid-card p {
+            font-family: 'Caveat', cursive;
+            font-size: 15px;
+            color: #5a4b43;
+            margin: 6px 0 0 0;
+            text-align: center;
+        }
+
+        .card-1 { top: 10px; left: 0px; transform: rotate(-8deg); z-index: 1; }
+        .card-2 { top: 0px; left: 90px; transform: rotate(4deg); z-index: 2; }
+        .card-3 { top: 20px; left: 175px; transform: rotate(-6deg); z-index: 1; }
+
+        .polaroid-card:hover {
+            z-index: 10;
+            transform: scale(1.12) rotate(0deg);
+            box-shadow: 0 12px 25px rgba(92, 29, 52, 0.15);
+        }
+
+        .mood-box {
+            background-color: #f7d6df; 
+            padding: 22px 30px;
+            border-radius: 24px;
+            border: 1px solid #f3c2d0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            box-shadow: 0 4px 15px rgba(92, 29, 52, 0.04);
+        }
+
+        .mood-info h3 {
+            font-size: 15px;
+            font-weight: 800;
+            color: #4a1026;
+            margin: 0 0 4px 0;
+        }
+
+        .mood-info p {
+            font-size: 12px;
+            color: #5c2738;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .mood-action-btn {
+            background-color: #5c1d34;
+            color: #ffffff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 14px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(92, 29, 52, 0.2);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .mood-action-btn:hover {
+            background-color: #7a2846;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin-bottom: 6px;
+        }
+
+        .section-title p {
+            font-size: 13px;
+            color: #6b5b52;
+            margin: 0;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid #fce7ec;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(92, 29, 52, 0.08);
+        }
+
+        .product-img-box {
+            width: 100%;
+            height: 165px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-img-box img {
+            transform: scale(1.06);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #5c1d34;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 10px;
+        }
+
+        .product-content {
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-name {
+            font-size: 15px;
+            font-weight: 800;
+            color: #5c1d34;
+            margin-bottom: 6px;
+        }
+
+        .product-desc {
+            font-size: 12px;
+            color: #6b5b52;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+
+        .product-price {
+            font-size: 14px;
+            font-weight: 800;
+            color: #8b4a62;
+        }
+
+        .order-btn {
+            background-color: #f8a5c2;
+            color: #4a1026;
+            border: none;
+            padding: 7px 14px;
+            border-radius: 12px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .order-btn:hover {
+            background-color: #f582ac;
+            transform: scale(1.05);
+        }
+
+        .info-extras {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .extra-card {
+            background-color: #adc178; 
+            padding: 22px 25px;
+            border-radius: 22px;
+            border: 1px solid #adc178;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+        }
+
+        .extra-icon {
+            width: 45px;
+            height: 45px;
+            background-color: #ffffff;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .extra-text h3 {
+            font-size: 14px;
+            font-weight: 800;
+            color: #2f3e46;
+            margin: 0 0 3px 0;
+        }
+
+        .extra-text p {
+            font-size: 12px;
+            color: #525b56;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .home-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            .left-content {
+                text-align: center;
+            }
+            .category-buttons {
+                justify-content: center;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-extras {
+                grid-template-columns: 1fr;
+            }
+            .mood-box {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        
+        <!-- HERO SECTION (Situs Utama) -->
+        <section class="home-container">
+            <div class="left-content">
+                <h1 class="welcome-title">Selamat Datang di<br>Ivanable Fleur!</h1>
+                <p class="intro-text">
+                    Toko ini menyediakan berbagai macam bunga pilihan. Meskipun harganya terjangkau, setiap produk dipastikan memiliki kualitas terjamin no. 1!
+                </p>
+                <div class="category-buttons">
+                    <span class="mini-btn"> Bunga Kawat</span>
+                    <span class="mini-btn"> Bunga Segar</span>
+                    <span class="mini-btn"> Bunga Artifisial</span>
+                </div>
+                <p class="slogan">"Mau nyari bunga? Ingat Ivanable Fleur aja! "</p>
+            </div>
+
+            <div class="right-content">
+                <div class="polaroid-gallery">
+                    <div class="polaroid-card card-1">
+                        <img src="img/bunga kawat.jpeg" alt="Bunga Kawat">
+                        <p>Bunga Kawat</p>
+                    </div>
+                    <div class="polaroid-card card-2">
+                        <img src="img/bunga segar.jpeg" alt="Bunga Segar">
+                        <p>Bunga Segar</p>
+                    </div>
+                    <div class="polaroid-card card-3">
+                         <img src="img/bunga artificial.jpeg" alt="Artifisial">
+                        <p>Artifisial</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: 3 BEST SELLER BUNGA -->
+        <section>
+            <div class="section-title">
+                <h2>Bunga Best Seller Pilihan</h2>
+                <p>Produk terfavorit yang paling sering dicari dan dipesan oleh pelanggan setia kami.</p>
+            </div>
+
+            <div class="products-grid">
+                <!-- Produk 1 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Terlaris</span>
+                        <img src="img/bunga kawat.jpeg" alt="Buket Lily Kawat">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Buket Lily Kawat</h3>
+                        <p class="product-desc">Bunga ini awet selamanya tanpa layu. Cocok untuk hadiah wisuda atau ulang tahun.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 65.000</span>
+                            <button class="order-btn" onclick="alert(' Terima kasih! Pesanan Buket Lily Kawat akan segera diproses.')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produk 2 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Favorit</span>
+                       <img src="img/bunga segar.jpeg" alt="Fresh Lily Bouquet">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Fresh Lily Bouquet</h3>
+                        <p class="product-desc">Bunga Lily yang dirangkai elegan untuk momen spesial.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 120.000</span>
+                            <button class="order-btn" onclick="alert(' Terima kasih! Pesanan Fresh Lily Bouquet akan segera diproses.')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produk 3 -->
+                <div class="product-card">
+                    <div class="product-img-box">
+                        <span class="product-badge">Estetik</span>
+                        <img src="img/bunga artificial.jpeg" alt="Artifisial Rose Flower">
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-name">Artifisial Rose Flower</h3>
+                        <p class="product-desc">Bunga mawar artifisial yang awet siap dipajang untuk mempercantik sudut ruangan.</p>
+                        <div class="product-footer">
+                            <span class="product-price">Rp 85.000</span>
+                            <button class="order-btn" onclick="alert(' Terima kasih! Pesanan Artifisial Rose Flower akan segera diproses.')">Pesan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: KEUNGGULAN -->
+        <section class="info-extras">
+            <div class="extra-card">
+                <div class="extra-icon">
+                    <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <div class="extra-text">
+                    <h3>Pengiriman Aman</h3>
+                    <p>Dijamin sampai dalam keadaan segar, rapi, dan sempurna tanpa cacat.</p>
+                </div>
+            </div>
+            <div class="extra-card">
+                <div class="extra-icon">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="extra-text">
+                    <h3>Bisa Custom Desain</h3>
+                    <p>Pilih warna & kartu ucapan bebas sesuai keinginanmu untuk orang tersayang.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
