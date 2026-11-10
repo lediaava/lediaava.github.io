@@ -1,5 +1,8 @@
 <!DOCTYPE html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Katalog Produk - Ivanable Fleur</title>
 
     <!-- Font Modern dari Google Fonts -->
@@ -110,7 +113,7 @@
             gap: 20px;
         }
 
-        /* --- KARTU PRODUK --- */
+       
         .product-card {
             background-color: #ffffff;
             border-radius: 20px;
@@ -156,6 +159,42 @@
             padding: 4px 10px;
             border-radius: 8px;
             letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+      
+        .like-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.85);
+            border: none;
+            border-radius: 20px;
+            padding: 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 700;
+            color: #5c1d34;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s ease;
+            z-index: 2;
+        }
+
+        .like-btn i {
+            font-size: 13px;
+            color: #aaa;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .like-btn.liked i {
+            color: #e63946;
+        }
+
+        .like-btn:hover {
+            background: #ffffff;
         }
 
         .product-content {
@@ -169,7 +208,7 @@
             font-size: 14px;
             font-weight: 800;
             color: #5c1d34;
-            margin-bottom: 5px;
+            margin: 0 0 5px 0;
         }
 
         .product-desc {
@@ -210,7 +249,101 @@
             background-color: #f8a5c2;
         }
   
-        /* Footer Sumber */
+ 
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 20px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: #5c1d34;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #6b5b52;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #5c1d34;
+            margin-bottom: 4px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #f2cdd6;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            box-sizing: border-box;
+        }
+
+        .form-group input[readonly] {
+            background-color: #fce8ed;
+            color: #5c1d34;
+            font-weight: 700;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #5c1d34;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #8b4a62;
+        }
+
+       
         .sources-footer {
             margin-top: 30px;
             padding: 20px;
@@ -247,7 +380,6 @@
             text-decoration: underline;
         }
 
-        /* Responsif Layar Kecil (HP) */
         @media (max-width: 768px) {
             .products-grid {
                 grid-template-columns: 1fr;
@@ -261,12 +393,10 @@
         
         <!-- HEADER / JUDUL KATALOG -->
         <header class="catalog-hero">
-<h1> Katalog Lengkap Ivanable Fleur</h1>
-                      <div class="filter-buttons">
+            <h1>Katalog Lengkap Ivanable Fleur</h1>
             <p>Pilih rangkaian bunga terbaik untuk orang tersayang. Tersedia pilihan segar, kawat awet, dan artifisial estetik!</p>
             
             <div class="filter-buttons">
-                <div class="filter-buttons">
                 <button class="filter-btn active" onclick="location.href='#'">Semua Koleksi</button>
                 <button class="filter-btn" onclick="location.href='#segar'">Bunga Segar</button>
                 <button class="filter-btn" onclick="location.href='#kawat'">Bunga Kawat</button>
@@ -285,6 +415,9 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Terlaris</span>
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">12</span>
+                        </button>
                         <img src="img/bunga segar.jpeg" alt="Fresh Lily Bouquet">
                     </div>
                     <div class="product-content">
@@ -292,7 +425,7 @@
                         <p class="product-desc">Bunga lily segar pilihan dirangkai elegan untuk momen romantis.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 120.000</span>
-                            <button class="order-btn" onclick="alert('🌷 Pesanan Fresh Lily Bouquet berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Fresh Lily Bouquet', 'Rp 120.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -300,14 +433,17 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Favorit</span>
-                       <img src="img/Lily basket.jpe"  alt="Sunset Lily Basket">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">8</span>
+                        </button>
+                        <img src="img/Lily basket.jpe" alt="Sunset Lily Basket">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Sunset Lily Basket</h3>
                         <p class="product-desc">Keranjang bunga lili asli yang harum dan menenangkan ruangan.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 150.000</span>
-                            <button class="order-btn" onclick="alert('🌷 Pesanan Sunset Lily Basket berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Sunset Lily Basket', 'Rp 150.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -315,6 +451,9 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Elegan</span>
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">15</span>
+                        </button>
                         <img src="img/Tulips.jpe" alt="Sweet Tulip Fresh">
                     </div>
                     <div class="product-content">
@@ -322,7 +461,7 @@
                         <p class="product-desc">Tulip segar import pilihan warna pastel lembut nan menawan.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 175.000</span>
-                            <button class="order-btn" onclick="alert('🌷 Pesanan Sweet Tulip Fresh berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Sweet Tulip Fresh', 'Rp 175.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -330,14 +469,17 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Eksklusif</span>
-                         <img src="img/peony.jpe" alt="Peony Dream Box">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">20</span>
+                        </button>
+                        <img src="img/peony.jpe" alt="Peony Dream Box">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Peony Dream Box</h3>
                         <p class="product-desc">Bunga peony segar dalam kotak box eksklusif kado spesial.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 210.000</span>
-                            <button class="order-btn" onclick="alert('🌷 Pesanan Peony Dream Box berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Peony Dream Box', 'Rp 210.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -345,6 +487,9 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Manis</span>
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">6</span>
+                        </button>
                         <img src="img/carnation.jpe" alt="Carnation Love Hug">
                     </div>
                     <div class="product-content">
@@ -352,7 +497,7 @@
                         <p class="product-desc">Buket anyelir segar penuh warna untuk ungkapan rasa sayang.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 95.000</span>
-                            <button class="order-btn" onclick="alert('🌷 Pesanan Carnation Love Hug berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Carnation Love Hug', 'Rp 95.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -360,6 +505,9 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Spesial</span>
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">11</span>
+                        </button>
                         <img src="img/hydragea.jpe" alt="Hydrangea Pastel Fresh">
                     </div>
                     <div class="product-content">
@@ -367,7 +515,7 @@
                         <p class="product-desc">Buket hidrangea besar segar yang rimbun dan cantik.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 160.000</span>
-                            <button class="order-btn" onclick="alert('🌷 Pesanan Hydrangea Pastel Fresh berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Hydrangea Pastel Fresh', 'Rp 160.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -385,6 +533,9 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Terlaris</span>
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">34</span>
+                        </button>
                         <img src="img/bunga kawat.jpeg" alt="Buket Lily Kawat">
                     </div>
                     <div class="product-content">
@@ -392,7 +543,7 @@
                         <p class="product-desc">Cantik, awet selamanya tanpa layu. Cocok untuk hadiah wisuda.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 65.000</span>
-                            <button class="order-btn" onclick="alert('🌸 Pesanan Buket Tulip Kawat berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Buket Lily Kawat', 'Rp 65.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -400,14 +551,17 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Lucu</span>
-                         <img src="img/sunflower.jpe" alt="Sunflower Kawat Mini">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">19</span>
+                        </button>
+                        <img src="img/sunflower.jpe" alt="Sunflower Kawat Mini">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Sunflower Kawat Mini</h3>
                         <p class="product-desc">Bunga matahari kawat ceria yang manis untuk dekorasi meja.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 45.000</span>
-                            <button class="order-btn" onclick="alert('🌸 Pesanan Sunflower Kawat Mini berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Sunflower Kawat Mini', 'Rp 45.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -415,6 +569,9 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Custom</span>
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">14</span>
+                        </button>
                         <img src="img/daisy.jpe" alt="Pastel Daisy Kawat">
                     </div>
                     <div class="product-content">
@@ -422,7 +579,7 @@
                         <p class="product-desc">Rangkaian bunga daisy kawat warna-warni super estetik.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 75.000</span>
-                            <button class="order-btn" onclick="alert('🌸 Pesanan Pastel Daisy Kawat berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Pastel Daisy Kawat', 'Rp 75.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -430,14 +587,17 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Favorit</span>
-                        <img src="img/mawar.jpe"  alt="Rose Kawat Single Box">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">22</span>
+                        </button>
+                        <img src="img/mawar.jpe" alt="Rose Kawat Single Box">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Rose Kawat Single Box</h3>
                         <p class="product-desc">Setangkai mawar kawat dalam box cantik anti debu.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 35.000</span>
-                            <button class="order-btn" onclick="alert('🌸 Pesanan Rose Kawat Single Box berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Rose Kawat Single Box', 'Rp 35.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -445,14 +605,17 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Unik</span>
-                         <img src="img/lavender.jpe" alt="Lavender Kawat Jar">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">17</span>
+                        </button>
+                        <img src="img/lavender.jpe" alt="Lavender Kawat Jar">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Lavender Kawat Jar</h3>
                         <p class="product-desc">Hiasan toples jar berisi bunga lavender kawat ungu menawan.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 85.000</span>
-                            <button class="order-btn" onclick="alert('🌸 Pesanan Lavender Kawat Jar berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Lavender Kawat Jar', 'Rp 85.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -460,14 +623,17 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Mega</span>
-                         <img src="img/mix.jpe" alt="Grand Mix Pipe Bouquet">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">28</span>
+                        </button>
+                        <img src="img/mix.jpe" alt="Grand Mix Pipe Bouquet">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Grand Mix Pipe Bouquet</h3>
                         <p class="product-desc">Buket besar gabungan berbagai jenis bunga kawat warna-warni.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 135.000</span>
-                            <button class="order-btn" onclick="alert('🌸 Pesanan Grand Mix Pipe Bouquet berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Grand Mix Pipe Bouquet', 'Rp 135.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -485,14 +651,17 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Estetik</span>
-                         <img src="img/bunga artificial.jpeg" alt="Artifisial Rose Box">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">9</span>
+                        </button>
+                        <img src="img/bunga artificial.jpeg" alt="Artifisial Rose Box">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Artifisial Rose Box</h3>
                         <p class="product-desc">Kotak bunga Rose artifisial siap pajang mempercantik ruangan.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 85.000</span>
-                            <button class="order-btn" onclick="alert('🌿 Pesanan Artifisial Rose Box berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Artifisial Rose Box', 'Rp 85.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -500,6 +669,9 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Modern</span>
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">13</span>
+                        </button>
                         <img src="img/eucaliptus.jpe" alt="Eucalyptus Pot Artifisial">
                     </div>
                     <div class="product-content">
@@ -507,7 +679,7 @@
                         <p class="product-desc">Tanaman hias artifisial dalam pot estetik minimalis ruangan.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 95.000</span>
-                            <button class="order-btn" onclick="alert('🌿 Pesanan Eucalyptus Pot Artifisial berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Eucalyptus Pot Artifisial', 'Rp 95.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -515,14 +687,17 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Premium</span>
-                         <img src="img/Hydrangea 2.jpe" alt="Hydrangea Artifisial Bouquet">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">16</span>
+                        </button>
+                        <img src="img/Hydrangea 2.jpe" alt="Hydrangea Artifisial Bouquet">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Hydrangea Artifisial Bouquet</h3>
                         <p class="product-desc">Buket bunga hidrangea tiruan dengan sentuhan sangat natural.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 110.000</span>
-                            <button class="order-btn" onclick="alert('🌿 Pesanan Hydrangea Artifisial Bouquet berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Hydrangea Artifisial Bouquet', 'Rp 110.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -530,6 +705,9 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Chic</span>
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">25</span>
+                        </button>
                         <img src="img/orchid white.jpe" alt="Orchid White Artifisial">
                     </div>
                     <div class="product-content">
@@ -537,7 +715,7 @@
                         <p class="product-desc">Anggrek putih artifisial mewah cocok untuk hiasan ruang tamu.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 145.000</span>
-                            <button class="order-btn" onclick="alert('🌿 Pesanan Orchid White Artifisial berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Orchid White Artifisial', 'Rp 145.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -545,14 +723,17 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Minimalis</span>
-                         <img src="img/cotton.jpe" alt="Cotton Flower Vase">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">10</span>
+                        </button>
+                        <img src="img/cotton.jpe" alt="Cotton Flower Vase">
                     </div>
                     <div class="product-content">
                         <h3 class="product-name">Cotton Flower Vase</h3>
                         <p class="product-desc">Rangkaian bunga kapas kering artifisial gaya Skandinavia.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 90.000</span>
-                            <button class="order-btn" onclick="alert('🌿 Pesanan Cotton Flower Vase berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Cotton Flower Vase', 'Rp 90.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
@@ -560,6 +741,9 @@
                 <div class="product-card">
                     <div class="product-img-box">
                         <span class="product-badge">Cozy</span>
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <i class="fa-solid fa-heart"></i> <span class="like-count">7</span>
+                        </button>
                         <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?w=400" alt="Rustic Eucalyptus Bunch">
                     </div>
                     <div class="product-content">
@@ -567,13 +751,14 @@
                         <p class="product-desc">Ikatan daun eucalyptus artifisial bernuansa rustic natural.</p>
                         <div class="product-footer">
                             <span class="product-price">Rp 70.000</span>
-                            <button class="order-btn" onclick="alert('🌿 Pesanan Rustic Eucalyptus Bunch berhasil dicatat!')">Pesan</button>
+                            <button class="order-btn" onclick="openOrderModal('Rustic Eucalyptus Bunch', 'Rp 70.000')">Pesan</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-  <!-- BAGIAN FOOTER SUMBER PINTEREST -->
+
+        <!-- FOOTER REFERENSI -->
         <footer class="sources-footer">
             <h3>Sumber Referensi Gambar (Pinterest)</h3>
             <div class="sources-links">
@@ -600,5 +785,75 @@
         </footer>
     </div>
 
+    <!-- POP-UP MODAL FORM PEMESANAN -->
+    <div id="orderModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Form Pemesanan</h3>
+                <button class="close-btn" onclick="closeOrderModal()">&times;</button>
+            </div>
+            <form onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label for="modalProductName">Produk Pilihan</label>
+                    <input type="text" id="modalProductName" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="modalProductPrice">Harga</label>
+                    <input type="text" id="modalProductPrice" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="userName">Nama Lengkap</label>
+                    <input type="text" id="userName" placeholder="Masukkan nama Anda" required>
+                </div>
+                <div class="form-group">
+                    <label for="userPhone">Nomor WhatsApp</label>
+                    <input type="tel" id="userPhone" placeholder="Contoh: 08123456789" required>
+                </div>
+                <div class="form-group">
+                    <label for="userAddress">Alamat Pengiriman</label>
+                    <textarea id="userAddress" rows="3" placeholder="Masukkan alamat lengkap..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Kirim Pesanan via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Fitur Like Toggle
+        function toggleLike(btn) {
+            btn.classList.toggle('liked');
+            const countSpan = btn.querySelector('.like-count');
+            let currentCount = parseInt(countSpan.textContent);
+            
+            if (btn.classList.contains('liked')) {
+                countSpan.textContent = currentCount + 1;
+            } else {
+                countSpan.textContent = currentCount - 1;
+            }
+        }
+
+        // Fitur Modal Form Pemesanan
+        function openOrderModal(productName, price) {
+            document.getElementById('modalProductName').value = productName;
+            document.getElementById('modalProductPrice').value = price;
+            document.getElementById('orderModal').style.display = 'flex';
+        }
+
+        function closeOrderModal() {
+            document.getElementById('orderModal').style.display = 'none';
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            const product = document.getElementById('modalProductName').value;
+            const price = document.getElementById('modalProductPrice').value;
+            const name = document.getElementById('userName').value;
+            const phone = document.getElementById('userPhone').value;
+            const address = document.getElementById('userAddress').value;
+
+            alert(`Terima kasih, ${name}!\nPesanan untuk "${product}" (${price}) sedang diproses.\nDetail pengiriman ke: ${address}`);
+            closeOrderModal();
+        }
+    </script>
 </body>
 </html>
